@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserPanelAPP", "UserPanelAPP\UserPanelAPP.csproj", "{0E13C35C-7A22-4558-BF82-25FBB302ADDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E13C35C-7A22-4558-BF82-25FBB302ADDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E13C35C-7A22-4558-BF82-25FBB302ADDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E13C35C-7A22-4558-BF82-25FBB302ADDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E13C35C-7A22-4558-BF82-25FBB302ADDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {66A55160-1CB3-497E-BDFF-F9D1AC24EE37}
+	EndGlobalSection
+EndGlobal

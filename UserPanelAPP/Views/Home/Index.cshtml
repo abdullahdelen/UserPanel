@@ -1,0 +1,136 @@
+﻿@model List<UserPanelAPP.Models.DTOs.UserDto>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    <h1>Users</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>TC</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>BirthDate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.Tcno</td>
+                    <td>@user.Name</td>
+                    <td>@user.Surname</td>
+                    <td>@user.BirthDate</td>
+                    <td>
+                        <button class="btn btn-primary" onclick="goToEditPage('@user.Id')">Edit</button>
+
+                        <button class="btn btn-danger" onclick="deleteUser('@user.Id')">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-right">
+        <button class="btn btn-primary" id="createUserBtn" onclick="redirectToCreateUser()">Create User</button>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    function goToEditPage(userId) {
+      
+        console.log(userId)
+      
+        window.location.href = '/Home/EditUser/' + userId;
+    }
+    function redirectToCreateUser() {
+        window.location.href = '@Url.Action("CreateUser", "Home")'; 
+    }
+
+  
+    document.getElementById('createUserBtn').addEventListener('click', function () {
+        $('#createUserModal').modal('show');
+    });
+
+
+
+
+    document.getElementById('createUserForm').addEventListener('submit', function (event) {
+        event.preventDefault(); 
+
+     
+        var tc = document.getElementById('tc').value;
+        var name = document.getElementById('name').value;
+        var surname = document.getElementById('surname').value;
+        var birthdate = document.getElementById('birthdate').value;
+
+        
+        $.ajax({
+            url: '/CreateNewUser/Create', 
+            method: 'POST',
+            data: {
+                tcno: tc,
+                name: name,
+                surname: surname,
+                birthdate: birthdate,
+                status:true
+            },
+            success: function (response) {
+                console.log('User created successfully:', response);
+                $('#createUserModal').modal('hide');
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error('Error creating user:', error);
+            }
+        });
+    });
+
+    function editUser(id, tcno, name, surname, birthdate) {
+        $.ajax({
+            url: '/Home/EditUser',
+            type: 'Post',
+            data: {
+                id: id,
+                tcno: tcno,
+                name: name,
+                surname: surname,
+                birthdate: birthdate
+            },
+            success: function (response) {
+                $('#inputId').val(response.id);
+                $('#inputTcno').val(response.tcno);
+                $('#inputName').val(response.name);
+                $('#inputSurname').val(response.surname);
+                $('#inputBirthDate').val(response.birthdate);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+
+    function deleteUser(userId) {
+        $.ajax({
+            url: '/Home/Delete/' + userId, 
+            method: 'POST',
+            success: function (response) {
+                console.log('User deleted successfully:', response);
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error('Error deleting user:', error);
+            }
+        });
+    }
+</script>
